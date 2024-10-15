@@ -1,0 +1,74 @@
+[
+  {
+    "workoutName": "Bench Press",
+    "workoutType": "strength",
+    "description": "A compound exercise for upper body strength.",
+    "caloriesBurnedPerRep": 10
+  },
+  {
+    "workoutName": "Deadlift",
+    "workoutType": "strength",
+    "description": "A total body strength exercise that targets the legs and lower back.",
+    "caloriesBurnedPerRep": 15
+  },
+  {
+    "workoutName": "Squat",
+    "workoutType": "strength",
+    "description": "A lower body strength exercise targeting the quads, hamstrings, and glutes.",
+    "caloriesBurnedPerRep": 12
+  },
+  {
+    "workoutName": "Pull-ups",
+    "workoutType": "strength",
+    "description": "An upper body pulling exercise targeting the back and arms.",
+    "caloriesBurnedPerRep": 8
+  },
+  {
+    "workoutName": "Push-ups",
+    "workoutType": "strength",
+    "description": "A bodyweight exercise targeting the chest, shoulders, and triceps.",
+    "caloriesBurnedPerRep": 5
+  },
+  {
+    "workoutName": "Leg Press",
+    "workoutType": "strength",
+    "description": "A lower body exercise targeting the quads and glutes.",
+    "caloriesBurnedPerRep": 10
+  },
+  {
+    "workoutName": "Shoulder Press",
+    "workoutType": "strength",
+    "description": "A compound exercise targeting the shoulders.",
+    "caloriesBurnedPerRep": 8
+  },
+  {
+    "workoutName": "Bicep Curl",
+    "workoutType": "strength",
+    "description": "An isolation exercise targeting the biceps.",
+    "caloriesBurnedPerRep": 3
+  },
+  {
+    "workoutName": "Tricep Extension",
+    "workoutType": "strength",
+    "description": "An isolation exercise targeting the triceps.",
+    "caloriesBurnedPerRep": 4
+  },
+  {
+    "workoutName": "Lunges",
+    "workoutType": "strength",
+    "description": "A lower body exercise targeting the quads, hamstrings, and glutes.",
+    "caloriesBurnedPerRep": 6
+  },
+  {
+    "workoutName": "Dumbbell Row",
+    "workoutType": "strength",
+    "description": "A compound pulling exercise targeting the back.",
+    "caloriesBurnedPerRep": 7
+  },
+  {
+    "workoutName": "Leg Curl",
+    "workoutType": "strength",
+    "description": "An isolation exercise targeting the hamstrings.",
+    "caloriesBurnedPerRep": 5
+  }
+]
