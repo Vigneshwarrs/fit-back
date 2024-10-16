@@ -8,7 +8,7 @@ const { getUserProfile, updateUserProfile } = require('../controllers/userContro
 // Set up multer storage (you can customize where the image is stored and its name)
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'public'); 
+    cb(null, "/opt/render/project/public"); 
   },
   filename: (req, file, cb) => {
     cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
