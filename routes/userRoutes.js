@@ -5,10 +5,15 @@ const router = express.Router();
 const protect = require('../middlewares/auth');
 const { getUserProfile, updateUserProfile } = require('../controllers/userController');
 
-// Set up multer storage (you can customize where the image is stored and its name)
+const storagePath = '/opt/render/project/public';
+
+if (!fs.existsSync(storagePath)) {
+  fs.mkdirSync(storagePath, { recursive: true });
+}
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "/opt/render/project/public"); 
+    cb(null, storagePath); 
   },
   filename: (req, file, cb) => {
     cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
