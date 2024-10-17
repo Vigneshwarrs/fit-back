@@ -36,7 +36,7 @@ app.use('/api/goal', goalRoutes);
 app.use('/api/foodItem', foodItemRoutes);
 app.use('/api/workoutOption', workoutOptionRoutes);
 app.use('/api/suggestions', suggestionRoutes);
-app.use('/uploads', express.static('public'));
+app.use('/uploads', express.static('/opt/render/project/public'));
 
 // App listeners
 const PORT = process.env.PORT || 5000;
