@@ -35,9 +35,7 @@ exports.getWaterByDate = async (req, res) => {
     try {
         const userId = req.user._id;
         const { date } = req.params;
-        const data = await WaterTracker.findOne({userId, date})
-        console.log(data);
-        if (!data) return res.status(404).send("No water taken on this date!");
+        const data = await WaterTracker.findOne({userId, date: new Date(date.trim())});
         res.json(data);
     } catch(err) {
         console.error(err);

@@ -46,7 +46,7 @@ exports.getSleepTracker = async (req, res) => {
 exports.getSleepTrackerByDate = async (req, res) => {
     try {
         const { date } = req.params;
-        const sleepTracker = await SleepTracker.findOne({userId: req.user._id, date: date});
+        const sleepTracker = await SleepTracker.findOne({userId: req.user._id, date: new Date(date.trim())});
         if (!sleepTracker) return res.status(404).send('Sleep Tracker not found');
         res.send(sleepTracker);
     }catch(err) {

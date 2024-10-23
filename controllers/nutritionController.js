@@ -340,8 +340,8 @@ exports.getNutritionById = async (req, res) => {
 // Get Daily Nutrition
 exports.getDailyNutrition = async (req, res) => {
   try {
-
-    const dailyNutrition = await Nutrition.findOne({ user: req.user._id });
+    const {date} = req.params;
+    const dailyNutrition = await Nutrition.findOne({ user: req.user._id, createdAt: new Date(data) });
 
     if (!dailyNutrition) {
       return res.status(404).json({ error: 'No nutrition entry found for this date' });
