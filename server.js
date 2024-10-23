@@ -26,8 +26,15 @@ mongoose
   .then(() => console.log("MongoDB connected..."))
   .catch((err) => console.error(`MongoDB connection error: ${err}`));
 
+  const corsOptions = {
+    origin: 'https://fit-trackpro.netlify.app', // your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // specify allowed methods
+    credentials: true, // if you need to include cookies in requests
+  };
+
+  app.use(cors(corsOptions));
 // Middleware
-app.use(cors());
+// app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
