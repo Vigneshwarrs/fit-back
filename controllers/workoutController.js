@@ -2,14 +2,14 @@ const Workout = require('../models/Workout');
 const WorkoutOption = require('../models/WorkoutOptions');
 
 exports.createWorkout = async (req, res) => {
-    let { workoutName, workoutType, description, sets, reps, weightPerSet, duration, caloriesBurned } = req.body;
+    let { workoutName, customWorkoutName, workoutType, description, sets, reps, weightPerSet, duration, caloriesBurned } = req.body;
 
     try {
         let workoutOption = await WorkoutOption.findOne({ workoutName: workoutName });
 
         if (!workoutOption) {
             const newWorkout = new Workout({
-                workoutName,
+                workoutName: customWorkoutName,
                 workoutType,
                 description,
                 sets,
@@ -75,3 +75,28 @@ exports.getWorkouts = async (req, res) => {
         res.status(500).json({ message: 'Server error', error });
     }
 };
+
+exports.getWorkoutByDate = async (req, res) => {
+    const { date } = req.params;
+
+    try {
+        const data = new Date(date);
+
+        const workouts = await Workout.find({
+            user: req.user._id,
+            createdAt: data, 
+        });
+
+        const totalCaloriesBurned = workouts.reduce((total, workout) => total + workout.caloriesBurned, 0);
+
+        res.json({
+            date: date,
+            totalCaloriesBurned,
+            workouts // Optional: include the workouts for more context
+        });
+    } catch (error) {
+        console.error('Error fetching workouts by date:', error);
+        res.status(500).json({ message: 'Server error', error });
+    }
+};
+
