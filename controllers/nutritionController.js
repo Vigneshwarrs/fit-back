@@ -2,6 +2,7 @@ const Nutrition = require('../models/Nutrition');
 const FoodItem = require('../models/FoodItems');
 const User = require('../models/User');
 const {createFoodItemFromNutrition} = require('../controllers/foodItemController');
+const { parseISO } = require('date-fns');
 // Create a new nutrition entry
 // exports.createNutrition = async (req, res) => {
 //   try {
@@ -219,8 +220,8 @@ const {createFoodItemFromNutrition} = require('../controllers/foodItemController
 exports.createNutrition = async (req, res) => {
   try {
     const { date, meals } = req.body;
-    const entryDate = date ? new Date(date) : new Date();
-    entryDate.setHours(0, 0, 0, 0);  // Set time to midnight for consistent date comparison
+    const entryDate = parseISO(new Date(date));
+    entryDate.setUTCHours(0, 0, 0, 0); 
 
     let nutritionEntry = await Nutrition.findOne({
       user: req.user._id,
