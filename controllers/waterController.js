@@ -77,32 +77,43 @@ const { startOfDay, endOfDay, subDays } = require('date-fns');
 exports.updateWaterIntake = async (req, res) => {
     try {
       const { date, glassCount, goal } = req.body;
+      const validGlassCount = Number.isFinite(Number(glassCount)) ? Number(glassCount) : 0;
       const userId = req.user._id;
 
-      const entry = await WaterEntry.findOneAndUpdate(
-        { 
-          userId,
-          date: {
-            $gte: startOfDay(new Date(date)),
-            $lte: endOfDay(new Date(date))
-          }
-        },
-        {
-          userId,
-          date,
-          glassCount,
-          goal,
-          totalMilliliters: glassCount * 250
-        },
-        { 
-          new: true,
-          upsert: true,
-          runValidators: true
-        }
-      );
-
+    //   const entry = await WaterEntry.findOneAndUpdate(
+    //     { 
+    //       userId,
+    //       date: {
+    //         $gte: startOfDay(new Date(date)),
+    //         $lte: endOfDay(new Date(date))
+    //       }
+    //     },
+    //     { 
+    //       new: true,
+    //       upsert: true,
+    //       runValidators: true
+    //     }
+    //   );
+      const existEntry = await WaterEntry.findOne({userId, date});
+      if (!existEntry) {
+        const newEntry = new WaterEntry({
+            userId,
+            date,
+            glassCount: validGlassCount,
+            goal,
+            totalMilliliters: 0
+          });
+          const response = await newEntry.save();
+          return res.status(201).json(response);
+      }
+      
+      existEntry.glassCount = validGlassCount;
+      existEntry.totalMilliliters += validGlassCount * 250;
+      existEntry.goal = goal;
+      const entry = await existEntry.save();
       res.json(entry);
     } catch (error) {
+        console.error(error);
       res.status(400).json({ error: error.message });
     }
   };
