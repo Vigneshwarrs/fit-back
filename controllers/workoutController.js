@@ -2,8 +2,8 @@ const Workout = require('../models/Workout');
 const WorkoutOption = require('../models/WorkoutOptions');
 
 exports.createWorkout = async (req, res) => {
-    let { workoutName, customWorkoutName, workoutType, description, sets, reps, weightPerSet, duration, caloriesBurned } = req.body;
-
+    let { workoutName, customWorkoutName, workoutDate, workoutType, description, sets, reps, weightPerSet, duration, caloriesBurned } = req.body;
+    const normalizedDate = new Date(workoutDate).setUTCHours(0,0,0,0);
     try {
         let workoutOption = await WorkoutOption.findOne({ workoutName: workoutName });
 
@@ -11,6 +11,7 @@ exports.createWorkout = async (req, res) => {
             const newWorkout = new Workout({
                 workoutName: customWorkoutName,
                 workoutType,
+                date: normalizedDate,
                 description,
                 sets,
                 reps,
