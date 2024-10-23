@@ -220,7 +220,7 @@ const { parseISO } = require('date-fns');
 exports.createNutrition = async (req, res) => {
   try {
     const { date, meals } = req.body;
-    const entryDate = parseISO(new Date(date));
+    const entryDate = new Date(date);
     entryDate.setUTCHours(0, 0, 0, 0); 
 
     let nutritionEntry = await Nutrition.findOne({
@@ -342,7 +342,7 @@ exports.getNutritionById = async (req, res) => {
 exports.getDailyNutrition = async (req, res) => {
   try {
     const {date} = req.params;
-    const dailyNutrition = await Nutrition.findOne({ user: req.user._id, createdAt: new Date(date).setUTCHours(0,0,0,0) });
+    const dailyNutrition = await Nutrition.findOne({ user: req.user._id, date: new Date(date).setUTCHours(0,0,0,0) });
     return res.status(200).json(dailyNutrition);
   } catch (error) {
     console.error('Error fetching daily nutrition entry:', error);
