@@ -80,11 +80,11 @@ exports.getWorkoutByDate = async (req, res) => {
     const { date } = req.params;
 
     try {
-        const data = new Date(date);
+        const normalizedDate = new Date(date).setUTCHours(0,0,0,0);
 
         const workouts = await Workout.find({
             user: req.user._id,
-            createdAt: data, 
+            createdAt: normalizedDate, 
         });
 
         const totalCaloriesBurned = workouts.reduce((total, workout) => total + workout.caloriesBurned, 0);
