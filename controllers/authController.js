@@ -27,7 +27,7 @@ exports.signUp = async (req, res)=> {
         await sendMail({
             to: user.email,
             subject: 'Account Activation',
-            message: `Please activate your account by clicking on the following link: ${process.env.BASE_URL}/activate/${activationToken}`
+            message: `Please activate your account by clicking on the following link: ${process.env.BASE_URL}/auth/activate/${activationToken}`
         });
         // const accessToken = generateToken(user);
         
