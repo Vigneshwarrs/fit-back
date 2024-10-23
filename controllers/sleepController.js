@@ -3,12 +3,13 @@ const SleepTracker = require('../models/SleepTracker');
 exports.createSleepTracker = async (req, res) => {
     try {
         const {date, bedTime, wakeTime, duration, quality, mood} = req.body;
-        const existingData = await SleepTracker.findOne({date: date});
+        const normalizedDate = new Date(date).setUTCHours(0,0,0,0);
+        const existingData = await SleepTracker.findOne({date: normalizedDate});
         if (!existingData) {
             const userId = req.user._id;
             const sleepTracker = new SleepTracker({
                 userId,
-                date,
+                date: normalizedDate,
                 bedTime,
                 wakeTime,
                 duration,

@@ -3,15 +3,16 @@ const WaterTracker = require("../models/WaterTracker");
 exports.createWater = async (req, res) => {
     try {
         const userId = req.user._id;
-        const {date, glassCount, goal} = req.body; 
-        const existingData = await WaterTracker.findOne({userId, date});
+        const {date, glassCount, goal} = req.body;
+        const normalizedDate = new Date(data).setUTCHours(0,0,0,0); 
+        const existingData = await WaterTracker.findOne({userId, date: normalizedDate});
         if (existingData) {
             existingData.glassCount = glassCount;
             existingData.goal = goal;
             const response = await existingData.save();
             return res.status(201).json(response);
         }
-        const newData = await WaterTracker({userId, date, glassCount, goal});
+        const newData = await WaterTracker({userId, date: normalizedDate, glassCount, goal});
         await newData.save();
         res.status(201).json(newData);
     }catch(err) {
@@ -35,7 +36,8 @@ exports.getWaterByDate = async (req, res) => {
     try {
         const userId = req.user._id;
         const { date } = req.params;
-        const data = await WaterTracker.findOne({userId, date: new Date(date.trim())});
+        const normalizedDate = new Date(date).setUTCHours(0,0,0,0);
+        const data = await WaterTracker.findOne({userId, date: normalizedDate});
         res.json(data);
     } catch(err) {
         console.error(err);
