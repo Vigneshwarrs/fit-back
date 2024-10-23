@@ -11,7 +11,6 @@ const userSchema = new mongoose.Schema(
     country: { type: String },
     goal: { type: mongoose.Schema.Types.ObjectId, ref: "Goal" },
     activityLevel: {type: String},
-    fitnessGoal: [{ type: mongoose.Schema.Types.ObjectId, ref: "Goal" }],
     workout: [{ type: mongoose.Schema.Types.ObjectId, ref: "Workout" }],
     nutrition: [{ type: mongoose.Schema.Types.ObjectId, ref: "Nutrition" }],
     email: { type: String, required: true, unique: true },
@@ -29,7 +28,6 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.pre("save", async function (next) {
-  // Hash the password before saving it to the database
   if (!this.isModified("password")) {
     return next();
   }
