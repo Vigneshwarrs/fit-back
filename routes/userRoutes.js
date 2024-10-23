@@ -6,11 +6,7 @@ const protect = require('../middlewares/auth');
 const fs = require('fs');
 const { getUserProfile, updateUserProfile } = require('../controllers/userController');
 
-const storagePath = '/opt/render/project/public';
-
-if (!fs.existsSync(storagePath)) {
-  fs.mkdirSync(storagePath, { recursive: true });
-}
+const storagePath = 'public';
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {

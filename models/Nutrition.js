@@ -9,16 +9,16 @@ const nutritionSchema = new mongoose.Schema({
   date: {
     type: String,
     required: true,
-    default: () => new Date().toISOString().slice(0, 10), // Store date in YYYY-MM-DD format
+    default: () => new Date().toISOString().slice(0, 10),
   },
   meals: [
     {
-      name: { type: String, required: true }, // e.g., 'Breakfast', 'Lunch'
+      name: { type: String, required: true },
       foodItems: [
         {
           foodId: { type: mongoose.Schema.Types.ObjectId, ref: 'FoodItem' },
           quantity: { type: Number, required: true },
-          calories: { type: Number, required: true }, // Store calories for this food item
+          calories: { type: Number, required: true },
           protein: { type: Number, required: true },
           carbs: { type: Number, required: true },
           fat: { type: Number, required: true },

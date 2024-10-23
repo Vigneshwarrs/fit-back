@@ -20,7 +20,7 @@ exports.updateUserProfile = async (req, res) => {
 
         console.log(req.file);
 
-        const user = await User.findById(req.user._id);
+        const user = await User.findById(req.user._id).populate('goal');
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -41,7 +41,7 @@ exports.updateUserProfile = async (req, res) => {
         }
 
         user.isProfileComplete = true;
-        const updatedUser = (await user.save()).populate('goal');
+        const updatedUser = await user.save();
         res.json(updatedUser);
     } catch (error) {
         console.error('Error updating user profile:', error);

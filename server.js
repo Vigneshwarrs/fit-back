@@ -12,6 +12,9 @@ const goalRoutes = require('./routes/goalRoutes');
 const foodItemRoutes = require('./routes/foodItemRoutes');
 const workoutOptionRoutes = require('./routes/workoutOptionRoutes');
 const suggestionRoutes = require('./routes/suggestionRoutes');
+const sleepRoutes = require('./routes/sleepRoutes');
+const weightRoutes = require('./routes/weightRoutes');
+const waterRoutes = require('./routes/waterRoutes');
 const path = require('path');
 
 // Load environment variables
@@ -36,7 +39,11 @@ app.use('/api/goal', goalRoutes);
 app.use('/api/foodItem', foodItemRoutes);
 app.use('/api/workoutOption', workoutOptionRoutes);
 app.use('/api/suggestions', suggestionRoutes);
-app.use('/uploads', express.static('/opt/render/project/public'));
+app.use('/api/sleep', sleepRoutes);
+app.use("/api/weight", weightRoutes);
+app.use("/api/water", waterRoutes);
+app.use('/uploads', express.static('public'));
+
 
 // App listeners
 const PORT = process.env.PORT || 5000;
