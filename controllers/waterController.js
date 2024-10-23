@@ -4,7 +4,7 @@ exports.createWater = async (req, res) => {
     try {
         const userId = req.user._id;
         const {date, glassCount, goal} = req.body;
-        const normalizedDate = new Date(data).setUTCHours(0,0,0,0); 
+        const normalizedDate = new Date(date).setUTCHours(0,0,0,0); 
         const existingData = await WaterTracker.findOne({userId, date: normalizedDate});
         if (existingData) {
             existingData.glassCount = glassCount;
