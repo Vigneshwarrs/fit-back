@@ -54,6 +54,7 @@ exports.createWorkout = async (req, res) => {
             weightPerSet,
             duration,
             caloriesBurned,
+            date: normalizedDate,   
             user: req.user._id,  // Assuming the user is attached to req object
         });
 
